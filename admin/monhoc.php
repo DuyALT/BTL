@@ -82,7 +82,7 @@ $title = 'Môn học';
 require __DIR__ . '/../includes/header.php';
 ?>
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4 class="mb-0">Môn học & hệ số điểm</h4>
+    <h4 class="mb-0">Môn học</h4>
     <a href="monhoc.php?add=1" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Thêm môn học</a>
 </div>
 
@@ -95,8 +95,6 @@ require __DIR__ . '/../includes/header.php';
         <div class="col-md-2"><label class="form-label">Mã môn *</label><input name="ma_mon" class="form-control" required data-label="Mã môn" value="<?= h($e['ma_mon']) ?>"></div>
         <div class="col-md-4"><label class="form-label">Tên môn *</label><input name="ten_mon" class="form-control" required data-label="Tên môn" value="<?= h($e['ten_mon']) ?>"></div>
         <div class="col-md-2"><label class="form-label">Số tín chỉ *</label><input type="number" min="1" max="10" name="so_tin_chi" class="form-control" required data-label="Số tín chỉ" value="<?= h($e['so_tin_chi']) ?>"></div>
-        <div class="col-md-2"><label class="form-label">Điểm đạt (≥)</label><input name="diem_dat" readonly class="form-control score" required data-label="Điểm đạt" value="5.0"></div>
-<div class="col-12 text-muted">Hệ số cố định: mỗi bài thường xuyên × 1, giữa HP × 2, cuối HP × 3.</div>
         <div class="col-12"><button class="btn btn-success">Lưu</button> <a href="monhoc.php" class="btn btn-secondary">Hủy</a></div>
     </form>
 </div>
@@ -110,13 +108,13 @@ require __DIR__ . '/../includes/header.php';
 
 <div class="card p-0">
 <table class="table table-hover mb-0">
-    <thead class="table-light"><tr><th>Mã môn</th><th>Tên môn</th><th>TC</th><th>Thường xuyên</th><th>Giữa HP</th><th>Cuối HP</th><th>Công thức</th><th>Điểm đạt</th><th>Số LHP</th><th class="text-end">Thao tác</th></tr></thead>
+    <thead class="table-light"><tr><th>Mã môn</th><th>Tên môn</th><th>TC</th><th>Số LHP</th><th class="text-end">Thao tác</th></tr></thead>
     <tbody>
     <?php foreach ($rows as $r): ?>
         <tr>
-            <td><?= h($r['ma_mon']) ?></td><td><?= h($r['ten_mon']) ?></td><td><?= $r['so_tin_chi'] ?></td>
-            <td>1 / bài</td><td>2</td><td>3</td>
-            <td class="small"><?= h(cong_thuc_text($r)) ?></td><td>≥ <?= fd($r['diem_dat']) ?></td><td><?= $r['so_lhp'] ?></td>
+            <td><?= h($r['ma_mon']) ?></td><td class="cell-entity"><?= h($r['ten_mon']) ?></td><td><?= $r['so_tin_chi'] ?></td>
+
+            <td><?= $r['so_lhp'] ?></td>
             <td class="text-end text-nowrap">
                 <a class="btn btn-sm btn-outline-primary" href="monhoc.php?edit=<?= $r['id'] ?>">Sửa</a>
                 <form method="post" class="d-inline"><?= csrf_field() ?><input type="hidden" name="id" value="<?= $r['id'] ?>">
@@ -124,7 +122,7 @@ require __DIR__ . '/../includes/header.php';
             </td>
         </tr>
     <?php endforeach; ?>
-    <?php if (!$rows): ?><tr><td colspan="10" class="text-center text-muted">Không có dữ liệu.</td></tr><?php endif; ?>
+    <?php if (!$rows): ?><tr><td colspan="5" class="text-center text-muted">Không có dữ liệu.</td></tr><?php endif; ?>
     </tbody>
 </table>
 </div>

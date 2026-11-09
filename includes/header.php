@@ -19,7 +19,7 @@ $menu = [
         ['admin/sinhvien.php', 'Sinh viên', 'bi-mortarboard', ['admin']],
         ['admin/lop.php', 'Lớp hành chính', 'bi-building', ['admin']],
         ['admin/giangvien.php', 'Giảng viên', 'bi-person-badge', ['admin']],
-        ['admin/monhoc.php', 'Môn học & hệ số', 'bi-journal-bookmark', ['admin']],
+        ['admin/monhoc.php', 'Môn học', 'bi-journal-bookmark', ['admin']],
         ['admin/hocky.php', 'Học kỳ', 'bi-calendar3', ['admin']],
         ['admin/namhoc.php', 'Năm học', 'bi-calendar-range', ['admin']],
         ['admin/lophocphan.php', 'Lớp học phần', 'bi-collection', ['admin']],
@@ -49,7 +49,7 @@ $pageDescriptions = [
     'admin/lop.php'=>'Quản lý lớp hành chính, khóa học và danh sách sinh viên.',
     'admin/lophocphan.php'=>'Tổ chức học phần theo môn học, học kỳ và giảng viên phụ trách.',
     'admin/lhp_sinhvien.php'=>'Quản lý danh sách sinh viên đăng ký học phần.',
-    'admin/monhoc.php'=>'Danh mục môn học, số tín chỉ và hệ số điểm hiện hành.',
+    'admin/monhoc.php'=>'Quản lý danh mục môn học và số tín chỉ.',
     'admin/hocky.php'=>'Tổ chức học kỳ và quản lý thời gian nhập điểm.',
     'admin/namhoc.php'=>'Quản lý danh sách năm học của hệ thống.',
     'admin/saoluu.php'=>'Lưu giữ và khôi phục dữ liệu dành cho quản trị viên.',
@@ -74,8 +74,8 @@ $pageDescriptions = [
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="<?= BASE_URL ?>assets/css/style.css" rel="stylesheet">
-    <link href="<?= BASE_URL ?>assets/css/eduscore.css?v=2" rel="stylesheet">
-    <?php if($page==='login.php'): ?><link href="<?= BASE_URL ?>assets/css/login-campus.css?v=1" rel="stylesheet"><?php endif; ?>
+    <link href="<?= BASE_URL ?>assets/css/eduscore.css?v=5" rel="stylesheet">
+    <?php if($page==='login.php'): ?><link href="<?= BASE_URL ?>assets/css/login-campus.css?v=2" rel="stylesheet"><?php endif; ?>
     <script>try{if(localStorage.getItem('eduscore-sidebar')==='collapsed')document.documentElement.dataset.sidebar='collapsed';}catch(e){}</script>
 </head>
 <body class="<?= $u ? 'has-sidebar' : 'guest' ?>">
@@ -107,7 +107,7 @@ $pageDescriptions = [
         <div class="sidebar-footer">
             <p class="workspace-label">KHÔNG GIAN HỌC TẬP · <?= h(TEN_VAI_TRO[$u['role']]) ?></p>
             <a class="nav-item-link <?= $page === 'doi_mat_khau.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>doi_mat_khau.php"><i class="bi bi-key"></i><span>Đổi mật khẩu</span></a>
-            <a class="nav-item-link text-danger-emphasis" href="<?= BASE_URL ?>logout.php"><i class="bi bi-box-arrow-right"></i><span>Đăng xuất</span></a>
+            <a class="nav-item-link text-danger-emphasis" href="<?= BASE_URL ?>logout.php" data-confirm="Bạn có chắc chắn muốn đăng xuất không?"><i class="bi bi-box-arrow-right"></i><span>Đăng xuất</span></a>
         </div>
     </aside>
 
@@ -136,7 +136,7 @@ $pageDescriptions = [
                     <li><hr class="dropdown-divider"></li>
                     <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="bi bi-person-circle me-2"></i>Hồ sơ cá nhân</button></li>
                     <li><a class="dropdown-item" href="<?= BASE_URL ?>doi_mat_khau.php"><i class="bi bi-key me-2"></i>Đổi mật khẩu</a></li>
-                    <li><a class="dropdown-item text-danger" href="<?= BASE_URL ?>logout.php"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
+                    <li><a class="dropdown-item text-danger" href="<?= BASE_URL ?>logout.php" data-confirm="Bạn có chắc chắn muốn đăng xuất không?"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
                 </ul>
             </div>
         </header>

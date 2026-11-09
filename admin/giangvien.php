@@ -99,7 +99,7 @@ require __DIR__ . '/../includes/header.php';
     <thead class="table-light"><tr><th>Mã GV</th><th>Họ tên</th><th>Email</th><th>Khoa</th><th>Tài khoản</th><th>Số LHP</th><th class="text-end">Thao tác</th></tr></thead>
     <tbody>
     <?php foreach ($rows as $r): ?>
-        <tr><td><?= h($r['ma_gv']) ?></td><td><?= h($r['ho_ten']) ?></td><td><?= h($r['email']) ?></td><td><?= h($r['khoa']) ?></td>
+        <tr><td><?= h($r['ma_gv']) ?></td><td class="cell-person"><?= h($r['ho_ten']) ?></td><td><?= h($r['email']) ?></td><td><?= h($r['khoa']) ?></td>
             <td><?= h($r['username'] ?? '—') ?> <?= $r['trang_thai'] === 'locked' ? '<span class="badge bg-danger">Khóa</span>' : '' ?></td><td><a href="lophocphan.php?gv=<?= $r['id'] ?>"><?= $r['so_lhp'] ?> học phần</a></td>
             <td class="text-end"><a class="btn btn-sm btn-outline-primary" href="giangvien.php?edit=<?= $r['id'] ?>">Sửa</a>
                 <form method="post" class="d-inline"><?= csrf_field() ?><input type="hidden" name="id" value="<?= $r['id'] ?>">

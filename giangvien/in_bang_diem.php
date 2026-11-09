@@ -58,14 +58,14 @@ if ($lhpId):
     <p class="text-center"><?= $l['diem_chinh_thuc']?'Điểm chính thức':'BẢN NHÁP — chưa công bố' ?></p>
     <p class="no-print"><a class="btn btn-success btn-sm" href="<?= BASE_URL ?>tra_cuu.php?lhp=<?= $lhpId ?>&amp;export=csv">Xuất CSV học phần</a></p>
     <p class="text-center mb-3">Môn: <b><?= h($l['ten_mon']) ?></b> (<?= h($l['ma_mon']) ?>, <?= $l['so_tin_chi'] ?> TC) · Lớp: <b><?= h($l['ma_lhp']) ?></b> · <?= h($l['ten_hk'] . ' – ' . $l['nam_hoc']) ?><br>
-        Giảng viên: <?= h($l['gv']) ?> · Công thức: <?= h(cong_thuc_text($l)) ?> · Đạt khi tổng kết ≥ 5 và cuối HP ≥ 5</p>
+        Giảng viên: <?= h($l['gv']) ?></p>
     <table class="table table-bordered table-sm">
         <thead class="text-center"><tr><th>STT</th><th>Mã SV</th><th>Họ và tên</th><th>Ngày sinh</th><th>Lớp</th>
             <?php foreach (COT_DIEM as $c => $t) echo '<th>' . $t . '<br>(' . HE_SO_DIEM[$c] . ')</th>'; ?>
             <th>Tổng kết</th><th>Kết quả</th></tr></thead>
         <tbody>
         <?php foreach ($rows as $i => $r): ?>
-            <tr class="text-center"><td><?= $i + 1 ?></td><td><?= h($r['ma_sv']) ?></td><td class="text-start"><?= h($r['ho_ten']) ?></td>
+            <tr class="text-center"><td><?= $i + 1 ?></td><td><?= h($r['ma_sv']) ?></td><td class="text-start cell-person"><?= h($r['ho_ten']) ?></td>
                 <td><?= $r['ngay_sinh'] ? date('d/m/Y', strtotime($r['ngay_sinh'])) : '' ?></td><td><?= h($r['lop']) ?></td>
                 <?php foreach (COT_DIEM as $c => $t) echo '<td>' . h(hien_thi_diem($r, $c)) . '</td>'; ?>
                 <td><b><?= fd($r['tong_ket']) ?></b></td><td><?= h($r['ket_qua']) ?></td></tr>
@@ -105,7 +105,7 @@ elseif ($lop !== '' && $hkId && $u['role'] === 'admin'):
         <tbody>
         <?php foreach ($svs as $i => $s):
             $tc = 0; $sum = 0; ?>
-            <tr class="text-center"><td><?= $i + 1 ?></td><td><?= h($s['ma_sv']) ?></td><td class="text-start"><?= h($s['ho_ten']) ?></td>
+            <tr class="text-center"><td><?= $i + 1 ?></td><td><?= h($s['ma_sv']) ?></td><td class="text-start cell-person"><?= h($s['ho_ten']) ?></td>
             <?php foreach ($mons as $m):
                 $t = $bang[$s['id']][$m['id']] ?? null;
                 if ($t !== null) { $tc += $m['so_tin_chi']; $sum += $t * $m['so_tin_chi']; } ?>

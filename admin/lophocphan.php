@@ -115,8 +115,8 @@ require __DIR__ . '/../includes/header.php';
     <thead class="table-light"><tr><th>Mã LHP</th><th>Môn học</th><th>TC</th><th>Học kỳ</th><th>Giảng viên</th><th>Sĩ số</th><th class="text-end">Thao tác</th></tr></thead>
     <tbody>
     <?php foreach ($rows as $r): ?>
-        <tr><td><?= h($r['ma_lhp']) ?></td><td><?= h($r['ten_mon']) ?></td><td><?= $r['so_tin_chi'] ?></td><td><?= h($r['ten_hk'] . ' ' . $r['nam_hoc']) ?></td>
-            <td><?= h($r['gv'] ?? '—') ?></td><td><?= $r['si_so'] ?>/<?= $r['si_so_toi_da'] ?></td>
+        <tr><td><?= h($r['ma_lhp']) ?></td><td class="cell-entity"><?= h($r['ten_mon']) ?></td><td><?= $r['so_tin_chi'] ?></td><td class="cell-entity"><?= h($r['ten_hk'] . ' ' . $r['nam_hoc']) ?></td>
+            <td class="cell-person"><?= h($r['gv'] ?? '—') ?></td><td><?= $r['si_so'] ?>/<?= $r['si_so_toi_da'] ?></td>
             <td class="text-end text-nowrap">
                 <a class="btn btn-sm btn-outline-success" href="lhp_sinhvien.php?id=<?= $r['id'] ?>">Sinh viên</a>
                 <a class="btn btn-sm btn-outline-info" href="<?= BASE_URL ?>giangvien/nhap_diem.php?lhp=<?= $r['id'] ?>">Điểm</a>

@@ -69,7 +69,6 @@ require __DIR__ . '/../includes/header.php';
     <div class="row">
         <div class="col-md-8">
             <b><?= h($lhp['ma_lhp']) ?> – <?= h($lhp['ten_mon']) ?></b> (<?= $lhp['so_tin_chi'] ?> TC) · <?= h($lhp['ten_hk'] . ' ' . $lhp['nam_hoc']) ?> · GV: <?= h($lhp['gv']) ?><br>
-            <details class="score-formula" open><summary>Công thức và điều kiện đạt</summary><div class="pt-2"><span class="text-muted">Tổng kết =</span> <b><?= h(cong_thuc_text($lhp)) ?></b><br><span class="text-muted">Đạt khi tổng kết ≥ 5 và điểm cuối HP ≥ 5.</span></div></details>
         </div>
         <div class="col-md-4 text-md-end">
             <a class="btn btn-outline-secondary btn-sm" href="lich_su.php?lhp=<?= $lhpId ?>">Lịch sử sửa điểm</a>
@@ -92,14 +91,14 @@ require __DIR__ . '/../includes/header.php';
         <thead class="table-light"><tr>
             <th>#</th><th>Mã SV</th><th>Họ tên</th><th>Lớp</th>
             <?php foreach (COT_DIEM as $c => $t): ?>
-                <th class="text-center"><?= $t ?><br><small class="text-muted">Hệ số <?= HE_SO_DIEM[$c] ?></small></th>
+                <th class="text-center"><?= $t ?></th>
             <?php endforeach; ?>
             <th class="text-center">Tổng kết</th><th>Kết quả</th>
         </tr></thead>
         <tbody>
         <?php foreach ($rows as $i => $r): ?>
             <tr data-search="<?= h(mb_strtolower($r['ma_sv'] . ' ' . $r['ho_ten'])) ?>">
-                <td><?= $i + 1 ?></td><td><?= h($r['ma_sv']) ?></td><td class="text-nowrap"><?= h($r['ho_ten']) ?></td><td><?= h($r['lop']) ?></td>
+                <td><?= $i + 1 ?></td><td><?= h($r['ma_sv']) ?></td><td class="text-nowrap cell-person"><?= h($r['ho_ten']) ?></td><td class="cell-entity"><?= h($r['lop']) ?></td>
                 <?php foreach (COT_DIEM as $c => $t):
                     $val = $old[$r['id']][$c] ?? hien_thi_diem($r, $c);
                     $val = is_scalar($val) ? $val : '';
@@ -116,7 +115,7 @@ require __DIR__ . '/../includes/header.php';
     </table>
     </div>
     </div>
-    <p class="score-help">Mỗi bài TX hệ số 1 · GK hệ số 2 · CK hệ số 3. Không để trống giữa các bài TX đã nhập. Cột TX cuối để trống không được tính là một bài. Tổng kết hiển thị để xem trước; kết quả lưu do máy chủ xác thực.</p>
+    <p class="score-help">Không để trống giữa các bài TX đã nhập. Cột TX cuối để trống không được tính là một bài.</p>
     <?php if ($rows): ?>
     <div class="row g-2 align-items-end save-panel">
         <div class="col-md-6"><label class="form-label">Lý do chỉnh sửa <span class="text-muted small">(Admin bắt buộc nhập khi sửa điểm chính thức)</span></label>
@@ -132,6 +131,6 @@ require __DIR__ . '/../includes/header.php';
 </form>
 
 <?php
-$extraScripts = '<script src="' . BASE_URL . 'assets/js/score-grid.js?v=1"></script>';
+$extraScripts = '<script src="' . BASE_URL . 'assets/js/score-grid.js?v=2"></script>';
 endif;
 require __DIR__ . '/../includes/footer.php';

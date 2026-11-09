@@ -22,9 +22,9 @@
 
   originalHeaders.slice(0, 3).forEach((th, i) => th.classList.add(['sticky-num', 'sticky-code', 'sticky-name'][i]));
   rows.forEach(row => Array.from(row.cells).slice(0, 3).forEach((td, i) => td.classList.add(['sticky-num', 'sticky-code', 'sticky-name'][i])));
-  originalHeaders[5].innerHTML = 'GK<small class="d-block fw-normal">Hệ số 2</small>';
+  originalHeaders[5].innerHTML = 'GK';
   originalHeaders[5].title = 'Giữa học phần';
-  originalHeaders[6].innerHTML = 'CK<small class="d-block fw-normal">Hệ số 3</small>';
+  originalHeaders[6].innerHTML = 'CK';
   originalHeaders[6].title = 'Cuối học phần';
   originalHeaders[7].textContent = 'TK'; originalHeaders[7].title = 'Tổng kết học phần';
   sourceHeader.hidden = true;
@@ -97,7 +97,7 @@
   const addColumn = initialValues => {
     columns++;
     const th = document.createElement('th'); th.className = 'text-center'; th.dataset.txColumn = String(columns);
-    th.innerHTML = 'TX' + columns + '<small class="d-block fw-normal">Hệ số 1</small>';
+    th.innerHTML = 'TX' + columns;
     header.insertBefore(th, sourceHeader);
     rows.forEach((row, i) => {
       const source = sources[i]; const td = document.createElement('td'); td.className = 'text-center';
@@ -121,7 +121,7 @@
       addColumn();
       const first = rows.find(r => r.style.display !== 'none');
       first?.querySelector('td:nth-child(' + (4 + columns) + ') input')?.focus();
-      window.eduToast?.('Đã thêm cột TX' + columns + '. Chỉ bài có điểm mới tham gia công thức.');
+      window.eduToast?.('Đã thêm cột TX' + columns + '.');
     });
   }
   document.getElementById('locSV')?.addEventListener('input', e => {

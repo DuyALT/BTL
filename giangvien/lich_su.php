@@ -43,8 +43,8 @@ require __DIR__ . '/../includes/header.php';
     <thead class="table-light"><tr><th>Thời gian</th><th>Người sửa</th><th>Lớp HP</th><th>Mã SV</th><th>Họ tên</th><th>Cột</th><th>Cũ</th><th>Mới</th><th>Lý do</th></tr></thead>
     <tbody>
     <?php foreach ($rows as $r): ?>
-        <tr><td class="text-nowrap"><?= date('d/m/Y H:i', strtotime($r['thoi_gian'])) ?></td><td><?= h(($r['nguoi'] ?? '(đã xóa)') . ' / ' . ($r['username'] ?? '')) ?></td>
-            <td><?= h($r['ma_lhp']) ?></td><td><?= h($r['ma_sv']) ?></td><td><?= h($r['sv']) ?></td><td><?= h(COT_DIEM[$r['cot']] ?? $r['cot']) ?></td>
+        <tr><td class="text-nowrap"><?= date('d/m/Y H:i', strtotime($r['thoi_gian'])) ?></td><td><span class="cell-person"><?= h($r['nguoi'] ?? '(đã xóa)') ?></span> / <?= h($r['username'] ?? '') ?></td>
+            <td><?= h($r['ma_lhp']) ?></td><td><?= h($r['ma_sv']) ?></td><td class="cell-person"><?= h($r['sv']) ?></td><td><?= h(COT_DIEM[$r['cot']] ?? $r['cot']) ?></td>
             <td class="text-danger"><?= h($r['gia_tri_cu_text'] ?? fd($r['gia_tri_cu'])) ?: '∅' ?></td><td class="text-success fw-bold"><?= h($r['gia_tri_moi_text'] ?? fd($r['gia_tri_moi'])) ?: '∅' ?></td><td><?= h($r['ly_do']) ?></td></tr>
     <?php endforeach; ?>
     <?php if (!$rows): ?><tr><td colspan="9" class="text-center text-muted">Không có bản ghi.</td></tr><?php endif; ?>

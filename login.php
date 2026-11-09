@@ -46,14 +46,17 @@ require __DIR__ . '/includes/header.php';
     <section class="login-hero">
         <div class="d-flex align-items-center gap-2">
             <?php require __DIR__ . '/includes/brand-logo.php'; ?>
-            <b class="fs-5">EduScore.</b>
+            <div>
+                <b class="fs-5">EduScore.</b>
+                <div class="login-institute">Học viện An ninh nhân dân</div>
+            </div>
         </div>
         <div>
-            <h1>Mỗi kết quả học tập,<br>một bước tiến xa hơn.</h1>
-            <p class="lead mt-3">Nhập điểm thành phần, tự động tính điểm tổng kết theo hệ số 1, 2, 3 và theo dõi kết quả học tập theo từng học kỳ.</p>
-            <div class="hero-feature"><i class="bi bi-calculator"></i><div><b>Tính điểm tự động</b><span>Thường xuyên, giữa học phần, cuối học phần</span></div></div>
-            <div class="hero-feature"><i class="bi bi-shield-check"></i><div><b>Phân quyền rõ ràng</b><span>Chỉ giảng viên phụ trách mới được sửa điểm</span></div></div>
-            <div class="hero-feature"><i class="bi bi-clock-history"></i><div><b>Lưu lịch sử chỉnh sửa</b><span>Ghi lại người sửa, giá trị cũ, mới và lý do</span></div></div>
+            <h1>Học hôm nay,<br>vững bước ngày mai.</h1>
+            <p class="lead mt-3">Mỗi ngày thêm một điều mới, mỗi nỗ lực thêm một bước gần hơn với ước mơ.</p>
+            <div class="hero-feature"><i class="bi bi-book"></i><div><b>Tri thức mở lối tương lai</b><span>Học để hiểu, học để làm, học để trưởng thành.</span></div></div>
+            <div class="hero-feature"><i class="bi bi-lightbulb"></i><div><b>Không ngừng khám phá</b><span>Mỗi câu hỏi là khởi đầu của một khám phá mới.</span></div></div>
+            <div class="hero-feature"><i class="bi bi-graph-up-arrow"></i><div><b>Kiên trì tạo nên thành công</b><span>Tiến bộ từng ngày, chạm tới những ước mơ lớn.</span></div></div>
         </div>
         <small class="opacity-75">© <?= date('Y') ?> Bài tập lớn PHP &amp; MySQL</small>
     </section>
@@ -61,7 +64,7 @@ require __DIR__ . '/includes/header.php';
     <!-- Cột phải: form đăng nhập -->
     <section class="login-panel">
         <div class="login-box">
-            <div class="login-brand-mobile"><?php require __DIR__ . '/includes/brand-logo.php'; ?><span>EduScore.</span></div>
+            <div class="login-brand-mobile"><?php require __DIR__ . '/includes/brand-logo.php'; ?><div><span>EduScore.</span><br><span class="login-institute">Học viện An ninh nhân dân</span></div></div>
             <div class="page-eyebrow mb-2">CỔNG QUẢN LÝ ĐIỂM HỌC TẬP</div>
             <h2 class="mb-1">Chào mừng trở lại!</h2>
             <p class="text-muted mb-4">Chào mừng bạn quay lại! Vui lòng đăng nhập để tiếp tục.</p>

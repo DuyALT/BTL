@@ -76,10 +76,10 @@ require __DIR__ . '/../includes/header.php';
     <h6><?= h($mons[0]['ten_hk'] . ' – Năm học ' . $mons[0]['nam_hoc']) ?></h6>
     <div class="table-responsive">
     <table class="table table-sm table-bordered mb-1">
-        <thead class="table-light text-center"><tr><th>Mã học phần</th><th>Mã môn</th><th class="text-start">Tên môn</th><th>TC</th><th>Thường xuyên (HS 1/bài)</th><th>Giữa HP (HS 2)</th><th>Cuối HP (HS 3)</th><th>Tổng kết</th><th>Hệ 4</th><th>Kết quả</th></tr></thead>
+        <thead class="table-light text-center"><tr><th>Mã học phần</th><th>Mã môn</th><th class="text-start">Tên môn</th><th>TC</th><th>Thường xuyên</th><th>Giữa HP</th><th>Cuối HP</th><th>Tổng kết</th><th>Hệ 4</th><th>Kết quả</th></tr></thead>
         <tbody>
         <?php foreach ($mons as $m): [$chu, $he4] = quy_doi($m['tong_ket'] === null ? null : (float)$m['tong_ket']); ?>
-            <tr class="text-center"><td><?= h($m['ma_lhp']) ?></td><td><?= h($m['ma_mon']) ?></td><td class="text-start"><?= h($m['ten_mon']) ?></td><td><?= $m['so_tin_chi'] ?></td>
+            <tr class="text-center"><td><?= h($m['ma_lhp']) ?></td><td><?= h($m['ma_mon']) ?></td><td class="text-start cell-entity"><?= h($m['ten_mon']) ?></td><td><?= $m['so_tin_chi'] ?></td>
                 <?php foreach (array_keys(COT_DIEM) as $c): ?><td><?= h(hien_thi_diem($m, $c)) ?></td><?php endforeach; ?>
                 <td class="fw-bold"><?= fd($m['tong_ket']) ?></td><td><?= $he4 === null ? '' : number_format($he4, 1) ?></td>
                 <td class="<?= $m['ket_qua'] === null ? 'text-muted' : ($m['ket_qua'] === 'Đạt' ? 'kq-dat' : 'kq-truot') ?>"><?= h($m['ket_qua'] ?? 'Chưa có') ?></td></tr>
@@ -91,6 +91,5 @@ require __DIR__ . '/../includes/header.php';
 </div>
 <?php endforeach; ?>
 <?php if (!$theoHK): ?><div class="alert alert-info">Chưa có điểm chính thức được công bố.</div><?php endif; ?>
-<p class="small text-muted">Quy đổi: A ≥ 8.5 (4.0) · B+ ≥ 8.0 (3.5) · B ≥ 7.0 (3.0) · C+ ≥ 6.5 (2.5) · C ≥ 5.5 (2.0) · D+ ≥ 5.0 (1.5) · D ≥ 4.0 (1.0) · F &lt; 4.0 (0)</p>
 </div>
 <?php require __DIR__ . '/../includes/footer.php'; ?>

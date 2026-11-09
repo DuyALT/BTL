@@ -95,7 +95,7 @@ require __DIR__ . '/../includes/header.php';
                 <thead><tr><th>#</th><th>Mã SV</th><th>Họ tên</th><th>Lớp</th><th>Tổng kết</th><th>Kết quả</th><th></th></tr></thead>
                 <tbody>
                 <?php foreach ($rows as $i => $r): ?>
-                    <tr><td><?= $i + 1 ?></td><td><?= h($r['ma_sv']) ?></td><td><?= h($r['ho_ten']) ?></td><td><?= h($r['lop']) ?></td>
+                    <tr><td><?= $i + 1 ?></td><td><?= h($r['ma_sv']) ?></td><td class="cell-person"><?= h($r['ho_ten']) ?></td><td class="cell-entity"><?= h($r['lop']) ?></td>
                         <td><?= fd($r['tong_ket']) ?></td><td class="<?= $r['ket_qua'] === 'Đạt' ? 'kq-dat' : 'kq-truot' ?>"><?= h($r['ket_qua']) ?></td>
                         <td class="text-end"><?php if (!$r['co_diem']): ?>
                             <form method="post" class="d-inline"><?= csrf_field() ?><input type="hidden" name="dk" value="<?= $r['dk_id'] ?>">
@@ -125,7 +125,7 @@ require __DIR__ . '/../includes/header.php';
                 <div style="max-height:380px;overflow:auto">
                 <table class="table table-sm">
                     <?php foreach ($chua as $s): ?>
-                        <tr><td><input type="checkbox" class="form-check-input" name="sv[]" value="<?= $s['id'] ?>"></td><td><?= h($s['ma_sv']) ?></td><td><?= h($s['ho_ten']) ?></td><td><?= h($s['lop']) ?></td></tr>
+                        <tr><td><input type="checkbox" class="form-check-input" name="sv[]" value="<?= $s['id'] ?>"></td><td><?= h($s['ma_sv']) ?></td><td class="cell-person"><?= h($s['ho_ten']) ?></td><td class="cell-entity"><?= h($s['lop']) ?></td></tr>
                     <?php endforeach; ?>
                     <?php if (!$chua): ?><tr><td class="text-muted">Không còn sinh viên phù hợp.</td></tr><?php endif; ?>
                 </table>

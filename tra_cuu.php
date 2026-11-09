@@ -27,7 +27,7 @@ $title='Tra cứu bảng điểm';require __DIR__.'/includes/header.php';
 $export=$_GET;$export['export']='csv';unset($export['page']);
 ?>
 <div class="d-flex justify-content-between gap-2 mb-3"><h4>Tra cứu bảng điểm</h4><div class="no-print"><a class="btn btn-success btn-sm" href="?<?= h(http_build_query($export)) ?>">Xuất CSV</a> <button class="btn btn-outline-dark btn-sm" onclick="window.print()">In bảng điểm</button></div></div>
-<p>Đạt khi tổng kết ≥ 5 và cuối HP ≥ 5. <?= $u['role']==='sinhvien'?'Chỉ hiển thị điểm đã lưu chính thức của bạn.':'' ?></p>
+<p><?= $u['role']==='sinhvien'?'Chỉ hiển thị điểm đã lưu chính thức của bạn.':'' ?></p>
 <form class="row g-2 mb-3 no-print">
 <div class="col-md-3"><input class="form-control" name="q" placeholder="Mã sinh viên / họ tên" value="<?= h($q) ?>"></div>
 <?php if($u['role']!=='sinhvien'): ?><div class="col-md-2"><select name="lop" class="form-select"><?= options($dsLop,'ma_lop','ma_lop',in('lop'),'Mọi lớp') ?></select></div><?php endif; ?>
@@ -38,8 +38,8 @@ $export=$_GET;$export['export']='csv';unset($export['page']);
 <div class="col-md-2"><select name="kq" class="form-select"><option value="">Mọi kết quả</option><?php foreach(['Đạt','Không đạt'] as $v): ?><option <?= in('kq')===$v?'selected':'' ?>><?= $v ?></option><?php endforeach; ?></select></div>
 <div class="col-md-2"><select name="sort" class="form-select"><?php foreach(['ma'=>'Theo mã SV','ten'=>'Theo họ tên','diem'=>'Điểm giảm dần'] as $k=>$v): ?><option value="<?= $k ?>" <?= in('sort')===$k?'selected':'' ?>><?= $v ?></option><?php endforeach; ?></select></div>
 <div class="col-auto"><button class="btn btn-primary">Tra cứu</button> <a href="tra_cuu.php" class="btn btn-link">Xóa lọc</a></div></form>
-<div class="card table-responsive"><table class="table table-sm table-bordered mb-0"><thead><tr><th>Mã SV</th><th>Họ tên</th><th>Lớp</th><th>Học phần</th><th>Học kỳ / năm</th><th>TX (HS 1/bài)</th><th>Giữa HP (HS 2)</th><th>Cuối HP (HS 3)</th><th>Tổng kết</th><th>Kết quả</th><th>Trạng thái</th></tr></thead><tbody>
-<?php foreach($rows as $r): ?><tr><td><?= h($r['ma_sv']) ?></td><td><?= h($r['ho_ten']) ?></td><td><?= h($r['lop']) ?></td><td><?= h($r['ma_lhp'].' — '.$r['ten_mon']) ?></td><td><?= h($r['ten_hk'].' '.$r['nam_hoc']) ?></td><td><?= h(hien_thi_diem($r,'cc')) ?></td><td><?= fd($r['kt']) ?></td><td><?= fd($r['thi']) ?></td><td><b><?= fd($r['tong_ket']) ?></b></td><td><?= h($r['ket_qua']??'Chưa đủ điểm') ?></td><td><?= $r['diem_chinh_thuc']?'Chính thức':'Bản nháp' ?></td></tr><?php endforeach; ?>
+<div class="card table-responsive"><table class="table table-sm table-bordered mb-0"><thead><tr><th>Mã SV</th><th>Họ tên</th><th>Lớp</th><th>Học phần</th><th>Học kỳ / năm</th><th>TX</th><th>Giữa HP</th><th>Cuối HP</th><th>Tổng kết</th><th>Kết quả</th><th>Trạng thái</th></tr></thead><tbody>
+<?php foreach($rows as $r): ?><tr><td><?= h($r['ma_sv']) ?></td><td class="cell-person"><?= h($r['ho_ten']) ?></td><td class="cell-entity"><?= h($r['lop']) ?></td><td class="cell-entity"><?= h($r['ma_lhp'].' — '.$r['ten_mon']) ?></td><td class="cell-entity"><?= h($r['ten_hk'].' '.$r['nam_hoc']) ?></td><td><?= h(hien_thi_diem($r,'cc')) ?></td><td><?= fd($r['kt']) ?></td><td><?= fd($r['thi']) ?></td><td><b><?= fd($r['tong_ket']) ?></b></td><td><?= h($r['ket_qua']??'Chưa đủ điểm') ?></td><td><?= $r['diem_chinh_thuc']?'Chính thức':'Bản nháp' ?></td></tr><?php endforeach; ?>
 <?php if(!$rows): ?><tr><td colspan="11" class="text-center text-muted">Chưa có kết quả phù hợp.</td></tr><?php endif; ?>
 </tbody></table></div><?php hien_phan_trang($pagination); ?>
 <?php require __DIR__.'/includes/footer.php'; ?>

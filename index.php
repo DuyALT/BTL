@@ -85,8 +85,8 @@ require __DIR__ . '/includes/header.php';
                 <tbody>
                 <?php foreach ($lhps as $l): $pt = $l['si_so'] ? round($l['da_co'] * 100 / $l['si_so']) : 0; ?>
                     <tr data-course-year="<?= h($l['nam_hoc']) ?>" data-course-term="<?= h($l['ten_hk']) ?>" data-course-state="<?= (int)$l['diem_chinh_thuc'] ?>">
-                        <td><?= h($l['ma_lhp']) ?><br><span class="badge <?= $l['diem_chinh_thuc']?'bg-success':'bg-warning text-dark' ?>"><?= $l['diem_chinh_thuc']?'Chính thức':'Bản nháp' ?></span></td><td><?= h($l['ten_mon']) ?></td>
-                        <td><?= h($l['ten_hk'] . ' ' . $l['nam_hoc']) ?></td>
+                        <td><?= h($l['ma_lhp']) ?><br><span class="badge <?= $l['diem_chinh_thuc']?'bg-success':'bg-warning text-dark' ?>"><?= $l['diem_chinh_thuc']?'Chính thức':'Bản nháp' ?></span></td><td class="cell-entity"><?= h($l['ten_mon']) ?></td>
+                        <td class="cell-entity"><?= h($l['ten_hk'] . ' ' . $l['nam_hoc']) ?></td>
                         <?php if ($isAdmin): ?><td><?= h($l['gv'] ?? '—') ?></td><?php endif; ?>
                         <td><?= $l['si_so'] ?></td>
                         <td><div class="progress" style="height:18px"><div class="progress-bar <?= $pt == 100 ? 'bg-success' : 'bg-warning' ?>" style="width:<?= $pt ?>%"><?= $l['da_co'] ?>/<?= $l['si_so'] ?></div></div></td>
