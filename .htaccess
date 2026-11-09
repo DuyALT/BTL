@@ -1,0 +1,10 @@
+Options -Indexes
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^(?:\.git|\.tools)(?:/|$) - [F,L]
+</IfModule>
+<FilesMatch "^\.">
+Require all denied
+</FilesMatch>
+ErrorDocument 404 /BTL-GitHub/errors/404.php
+ErrorDocument 500 /BTL-GitHub/errors/500.php

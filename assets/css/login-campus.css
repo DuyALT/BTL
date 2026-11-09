@@ -1,0 +1,30 @@
+/* Login-only background from the academy photo provided by the user. */
+.login-campus {
+    min-height:100vh;min-height:100svh;
+    grid-template-columns:minmax(0,1fr) minmax(390px,480px);
+    align-items:center;gap:32px;padding:28px;
+    background-color:#142d52;
+    background-image:linear-gradient(90deg,rgba(11,31,58,.78) 0%,rgba(11,31,58,.4) 48%,rgba(11,31,58,.12) 100%),url('../images/login-campus.jpg');
+    background-size:cover;background-position:center;background-repeat:no-repeat;
+}
+.login-campus .login-hero {background:transparent;margin:0;padding:28px;min-height:calc(100vh - 56px);min-height:calc(100svh - 56px);border-radius:0}
+.login-campus .login-hero::before,.login-campus .login-hero::after {display:none}
+.login-campus .login-hero .lead {color:#eef4ff;text-shadow:0 1px 6px #0b1f3a66}
+.login-campus .hero-feature span {color:#e0eafa}.login-campus .hero-feature i {background:#ffffff24;color:white}
+.login-campus .login-panel {padding:36px;background:rgba(255,255,255,.97);border:1px solid #ffffffaa;border-radius:22px;box-shadow:0 20px 70px #0b1f3a33;backdrop-filter:blur(12px);min-height:0}
+.login-campus .login-box {max-width:100%}
+.login-campus .login-note {margin-bottom:0}
+.forgot-password-link {border:0;padding:0;background:transparent;color:#2563eb;font-size:.73rem;font-weight:550;text-decoration:none}
+.forgot-password-link:hover {color:#142d52;text-decoration:underline}
+@media(max-width:991.98px){
+    .login-campus {grid-template-columns:minmax(0,480px);justify-content:center;padding:32px 24px;background-image:linear-gradient(rgba(11,31,58,.3),rgba(11,31,58,.35)),url('../images/login-campus.jpg')}
+    .login-campus .login-hero {display:none}
+    .login-campus .login-panel {padding:32px;min-height:0;width:100%}
+}
+@media(max-width:575.98px){
+    .login-campus {padding:24px 16px;background-position:50% center}
+    .login-campus .login-panel {padding:27px 22px;border-radius:18px}
+    .login-campus .login-brand-mobile {margin-bottom:22px}
+    .login-campus .login-box h2 {font-size:1.4rem}
+    .forgot-password-link {font-size:.7rem}
+}
