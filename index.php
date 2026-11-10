@@ -80,21 +80,20 @@ require __DIR__ . '/includes/header.php';
             <h6 id="hocphan"><i class="bi bi-list-check me-1 text-primary"></i>Tiến độ nhập điểm theo lớp học phần</h6>
             <div class="row g-2 mb-3 no-print" id="courseFilters"><div class="col-sm-4"><label for="courseYear" class="form-label">Năm học</label><select id="courseYear" class="form-select form-select-sm"><option value="">Mọi năm học</option><?php foreach(array_unique(array_column($lhps,'nam_hoc')) as $year): ?><option><?= h($year) ?></option><?php endforeach; ?></select></div><div class="col-sm-4"><label for="courseTerm" class="form-label">Học kỳ</label><select id="courseTerm" class="form-select form-select-sm"><option value="">Mọi học kỳ</option><?php foreach(array_unique(array_column($lhps,'ten_hk')) as $term): ?><option><?= h($term) ?></option><?php endforeach; ?></select></div><div class="col-sm-4"><label for="courseState" class="form-label">Trạng thái điểm</label><select id="courseState" class="form-select form-select-sm"><option value="">Tất cả trạng thái</option><option value="0">Bản nháp</option><option value="1">Đã chốt</option></select></div></div>
             <div class="table-responsive">
-            <table class="table table-sm table-hover table-nowrap mb-0">
-                <thead><tr><th>Mã LHP</th><th>Môn</th><th>Học kỳ</th><?php if ($isAdmin): ?><th>Giảng viên</th><?php endif; ?><th>Sĩ số</th><th style="min-width:150px">Đã có điểm</th><th>Không đạt</th><th></th></tr></thead>
+            <table class="table table-sm table-hover table-fit table-dense mb-0">
+                <thead><tr><th>Mã LHP</th><th>Môn</th><th>Học kỳ</th><?php if ($isAdmin): ?><th>Giảng viên</th><?php endif; ?><th style="min-width:72px">Đã có điểm</th><th>Không đạt</th><th></th></tr></thead>
                 <tbody>
                 <?php foreach ($lhps as $l): $pt = $l['si_so'] ? round($l['da_co'] * 100 / $l['si_so']) : 0; ?>
                     <tr data-course-year="<?= h($l['nam_hoc']) ?>" data-course-term="<?= h($l['ten_hk']) ?>" data-course-state="<?= (int)$l['diem_chinh_thuc'] ?>">
                         <td><?= h($l['ma_lhp']) ?><br><span class="badge <?= $l['diem_chinh_thuc']?'bg-success':'bg-warning text-dark' ?>"><?= $l['diem_chinh_thuc']?'Chính thức':'Bản nháp' ?></span></td><td class="cell-entity"><?= h($l['ten_mon']) ?></td>
-                        <td class="cell-entity"><?= h($l['ten_hk'] . ' ' . $l['nam_hoc']) ?></td>
-                        <?php if ($isAdmin): ?><td><?= h($l['gv'] ?? '—') ?></td><?php endif; ?>
-                        <td><?= $l['si_so'] ?></td>
+                        <td class="cell-entity text-nowrap"><?= h($l['ten_hk'] . ' ' . $l['nam_hoc']) ?></td>
+                        <?php if ($isAdmin): ?><td class="cell-person"><?= h($l['gv'] ?? '—') ?></td><?php endif; ?>
                         <td><div class="progress" style="height:18px"><div class="progress-bar <?= $pt == 100 ? 'bg-success' : 'bg-warning' ?>" style="width:<?= $pt ?>%"><?= $l['da_co'] ?>/<?= $l['si_so'] ?></div></div></td>
                         <td><?= (int)$l['truot'] ?></td>
-                        <td class="text-end"><a class="btn btn-sm btn-outline-primary" title="<?= $l['diem_chinh_thuc']?'Xem điểm chính thức':'Nhập điểm' ?>" href="<?= BASE_URL ?>giangvien/nhap_diem.php?lhp=<?= $l['id'] ?>"><i class="bi <?= $l['diem_chinh_thuc']?'bi-eye':'bi-pencil-square' ?>"></i></a><a class="btn btn-sm btn-outline-secondary" title="Danh sách sinh viên" href="<?= BASE_URL ?>giangvien/nhap_diem.php?lhp=<?= $l['id'] ?>#formDiem"><i class="bi bi-people"></i></a></td>
+                        <td class="text-end text-nowrap"><a class="btn btn-sm btn-outline-primary" title="<?= $l['diem_chinh_thuc']?'Xem điểm chính thức':'Nhập điểm' ?>" href="<?= BASE_URL ?>giangvien/nhap_diem.php?lhp=<?= $l['id'] ?>"><i class="bi <?= $l['diem_chinh_thuc']?'bi-eye':'bi-pencil-square' ?>"></i></a><a class="btn btn-sm btn-outline-secondary" title="Danh sách sinh viên" href="<?= BASE_URL ?>giangvien/nhap_diem.php?lhp=<?= $l['id'] ?>#formDiem"><i class="bi bi-people"></i></a></td>
                     </tr>
                 <?php endforeach; ?>
-                <?php if (!$lhps): ?><tr><td colspan="8" class="text-muted">Chưa có lớp học phần.</td></tr><?php endif; ?>
+                <?php if (!$lhps): ?><tr><td colspan="7" class="text-muted">Chưa có lớp học phần.</td></tr><?php endif; ?>
                 </tbody>
             </table>
             <p class="empty-state mb-0" id="courseFilterEmpty" hidden>Không có học phần phù hợp với bộ lọc.</p>
