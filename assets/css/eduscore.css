@@ -90,7 +90,7 @@ a {text-decoration:none} button,input,select,textarea {font:inherit}
 .cell-person,.cell-entity {font-weight:600;color:var(--ink)}
 .cell-person {white-space:nowrap}
 /* Bảng nhiều cột: giảm đệm ngang để tên in đậm vẫn đủ chỗ, không phải cuộn ngang. */
-.table.table-fit td,.table.table-fit th {padding-left:10px;padding-right:10px}
+.table.table-fit td,.table.table-fit th {padding-left:8px;padding-right:8px}
 /* Bảng dày đặc: đệm dọc và cỡ chữ gọn hơn để nhiều cột vẫn vừa khung. */
 .table.table-dense td,.table.table-dense th {padding-top:8px;padding-bottom:8px}
 .table.table-dense {font-size:.74rem}

@@ -81,12 +81,12 @@ require __DIR__ . '/includes/header.php';
             <div class="row g-2 mb-3 no-print" id="courseFilters"><div class="col-sm-4"><label for="courseYear" class="form-label">Năm học</label><select id="courseYear" class="form-select form-select-sm"><option value="">Mọi năm học</option><?php foreach(array_unique(array_column($lhps,'nam_hoc')) as $year): ?><option><?= h($year) ?></option><?php endforeach; ?></select></div><div class="col-sm-4"><label for="courseTerm" class="form-label">Học kỳ</label><select id="courseTerm" class="form-select form-select-sm"><option value="">Mọi học kỳ</option><?php foreach(array_unique(array_column($lhps,'ten_hk')) as $term): ?><option><?= h($term) ?></option><?php endforeach; ?></select></div><div class="col-sm-4"><label for="courseState" class="form-label">Trạng thái điểm</label><select id="courseState" class="form-select form-select-sm"><option value="">Tất cả trạng thái</option><option value="0">Bản nháp</option><option value="1">Đã chốt</option></select></div></div>
             <div class="table-responsive">
             <table class="table table-sm table-hover table-fit table-dense mb-0">
-                <thead><tr><th>Mã LHP</th><th>Môn</th><th>Học kỳ</th><?php if ($isAdmin): ?><th>Giảng viên</th><?php endif; ?><th style="min-width:72px">Đã có điểm</th><th>Không đạt</th><th></th></tr></thead>
+                <thead><tr><th>Mã LHP</th><th>Môn</th><th>Học kỳ</th><?php if ($isAdmin): ?><th>Giảng viên</th><?php endif; ?><th style="min-width:60px">Đã có điểm</th><th>Không đạt</th><th></th></tr></thead>
                 <tbody>
                 <?php foreach ($lhps as $l): $pt = $l['si_so'] ? round($l['da_co'] * 100 / $l['si_so']) : 0; ?>
                     <tr data-course-year="<?= h($l['nam_hoc']) ?>" data-course-term="<?= h($l['ten_hk']) ?>" data-course-state="<?= (int)$l['diem_chinh_thuc'] ?>">
                         <td><?= h($l['ma_lhp']) ?><br><span class="badge <?= $l['diem_chinh_thuc']?'bg-success':'bg-warning text-dark' ?>"><?= $l['diem_chinh_thuc']?'Chính thức':'Bản nháp' ?></span></td><td class="cell-entity"><?= h($l['ten_mon']) ?></td>
-                        <td class="cell-entity text-nowrap"><?= h($l['ten_hk'] . ' ' . $l['nam_hoc']) ?></td>
+                        <td class="cell-entity"><?= h($l['ten_hk'] . ' ' . $l['nam_hoc']) ?></td>
                         <?php if ($isAdmin): ?><td class="cell-person"><?= h($l['gv'] ?? '—') ?></td><?php endif; ?>
                         <td><div class="progress" style="height:18px"><div class="progress-bar <?= $pt == 100 ? 'bg-success' : 'bg-warning' ?>" style="width:<?= $pt ?>%"><?= $l['da_co'] ?>/<?= $l['si_so'] ?></div></div></td>
                         <td><?= (int)$l['truot'] ?></td>

@@ -8,7 +8,7 @@ Thiết kế lấy cảm hứng từ bố cục dashboard Sneat, tự viết b�
 - Sidebar desktop 250px, thu gọn 78px, lưu lựa chọn trong localStorage; menu trượt trên tablet/mobile. Menu vẫn được tạo theo quyền PHP hiện có.
 - Header, breadcrumb, tiêu đề và mô tả trang, menu tài khoản, hồ sơ dạng modal và liên kết đổi mật khẩu.
 - Card/KPI, bảng, bộ lọc, biểu mẫu, phân trang, badge kết quả, thông báo, modal xác nhận và trạng thái trống dùng chung.
-- Tên riêng trong bảng được in đậm bằng hai lớp dùng chung trong `assets/css/eduscore.css`: `.cell-person` cho họ tên người (giữ trên một dòng), `.cell-entity` cho tên môn, lớp hành chính, học kỳ, năm học. Bảng Sinh viên dùng thêm `.table-fit` để giảm đệm ngang cho đủ 11 cột.
+- Tên riêng trong bảng được in đậm bằng hai lớp dùng chung trong `assets/css/eduscore.css`: `.cell-person` cho họ tên người (giữ trên một dòng), `.cell-entity` cho tên môn, lớp hành chính, học kỳ, năm học. Bảng nhiều cột dùng thêm `.table-fit` (giảm đệm ngang) và `.table-dense` (giảm đệm dọc) để không phải cuộn ngang trên màn hình desktop.
 - Login có logo trên cả desktop/mobile, hiện/ẩn mật khẩu, autocomplete và trạng thái đang xử lý.
 - Nền login dùng ảnh học viện do người dùng cung cấp (`assets/images/login-campus.jpg`), được thiết kế riêng trong `assets/css/login-campus.css`. Liên kết Quên mật khẩu mở hướng dẫn liên hệ Admin để xác minh/cấp lại mật khẩu theo chức năng hiện có; chưa có luồng gửi email hoặc OTP tự động.
 - Bảng nhập điểm TX1…TXn, GK, CK, TK; cố định header/cột nhận diện; Tab/Enter/↑/↓; ô đang sửa, cảnh báo chưa lưu, validation và trạng thái lưu.

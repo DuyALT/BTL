@@ -74,7 +74,7 @@ $pageDescriptions = [
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="<?= BASE_URL ?>assets/css/style.css" rel="stylesheet">
-    <link href="<?= BASE_URL ?>assets/css/eduscore.css?v=6" rel="stylesheet">
+    <link href="<?= BASE_URL ?>assets/css/eduscore.css?v=7" rel="stylesheet">
     <?php if($page==='login.php'): ?><link href="<?= BASE_URL ?>assets/css/login-campus.css?v=3" rel="stylesheet"><?php endif; ?>
     <script>try{if(localStorage.getItem('eduscore-sidebar')==='collapsed')document.documentElement.dataset.sidebar='collapsed';}catch(e){}</script>
 </head>
