@@ -93,33 +93,29 @@ require __DIR__ . '/includes/header.php';
 
 <div class="card p-3 mb-3">
     <h6>Theo lớp học phần</h6>
-    <div class="table-responsive">
-    <table class="table table-sm table-hover table-fit table-dense">
+    <table class="table table-sm table-hover table-nowrap">
         <thead class="table-light"><tr><th>Lớp HP</th><th>Môn</th><th>Học kỳ</th><th>SV có điểm</th><th>Điểm TB</th><th>Cao nhất</th><th>Thấp nhất</th><th>Đạt</th><th>Không đạt</th><th>Tỷ lệ đạt</th><th class="no-print"></th></tr></thead>
         <tbody>
         <?php foreach ($theoLop as $r): ?>
-            <tr><td><?= h($r['ma_lhp']) ?></td><td class="cell-entity"><?= h($r['ten_mon']) ?></td><td class="cell-entity"><?= h($r['hk']) ?></td><td><?= $r['so_sv'] ?></td><td><b><?= $r['tb'] ?></b></td>
+            <tr><td><?= h($r['ma_lhp']) ?></td><td><?= h($r['ten_mon']) ?></td><td><?= h($r['hk']) ?></td><td><?= $r['so_sv'] ?></td><td><b><?= $r['tb'] ?></b></td>
                 <td><?= fd($r['cao']) ?></td><td><?= fd($r['thap']) ?></td><td class="kq-dat"><?= $r['dat'] ?></td><td class="kq-truot"><?= $r['truot'] ?></td>
                 <td><?= $tyLe($r['dat'], $r['so_sv']) ?>%</td><td class="no-print"><a href="<?= BASE_URL ?>giangvien/in_bang_diem.php?lhp=<?= $r['id'] ?>" target="_blank" class="small">In</a></td></tr>
         <?php endforeach; ?>
         <?php if (!$theoLop): ?><tr><td colspan="11" class="text-muted text-center">Chưa có dữ liệu.</td></tr><?php endif; ?>
         </tbody>
     </table>
-    </div>
 </div>
 <div class="card p-3">
     <h6>Theo môn học</h6>
-    <div class="table-responsive">
-    <table class="table table-sm table-hover table-fit table-dense">
+    <table class="table table-sm table-hover table-nowrap">
         <thead class="table-light"><tr><th>Mã môn</th><th>Tên môn</th><th>SV có điểm</th><th>Điểm TB</th><th>Đạt</th><th>Không đạt</th><th>Tỷ lệ đạt</th><th>Tỷ lệ không đạt</th></tr></thead>
         <tbody>
         <?php foreach ($theoMon as $r): ?>
-            <tr><td><?= h($r['ma_mon']) ?></td><td class="cell-entity"><?= h($r['ten_mon']) ?></td><td><?= $r['so_sv'] ?></td><td><b><?= $r['tb'] ?></b></td>
+            <tr><td><?= h($r['ma_mon']) ?></td><td><?= h($r['ten_mon']) ?></td><td><?= $r['so_sv'] ?></td><td><b><?= $r['tb'] ?></b></td>
                 <td><?= $r['dat'] ?></td><td><?= $r['truot'] ?></td><td><?= $tyLe($r['dat'], $r['so_sv']) ?>%</td><td><?= $tyLe($r['truot'], $r['so_sv']) ?>%</td></tr>
         <?php endforeach; ?>
         </tbody>
     </table>
-    </div>
 </div>
 <?php
 // Truyền dữ liệu sang JavaScript dạng JSON, phần vẽ biểu đồ nằm trong assets/js/thongke.js

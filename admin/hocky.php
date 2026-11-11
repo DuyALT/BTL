@@ -79,7 +79,7 @@ require __DIR__ . '/../includes/header.php';
     <thead class="table-light"><tr><th>Mã HK</th><th>Tên</th><th>Năm học</th><th>Số lớp học phần</th><th class="text-end">Thao tác</th></tr></thead>
     <tbody>
     <?php foreach ($rows as $r): ?>
-        <tr><td><?= h($r['ma_hk']) ?></td><td class="cell-entity"><?= h($r['ten_hk']) ?></td><td class="cell-entity"><?= h($r['nam_hoc']) ?></td><td><a href="lophocphan.php?hk=<?= $r['id'] ?>"><?= $r['so_lhp'] ?> học phần</a> · <?= h($r['trang_thai']) ?></td>
+        <tr><td><?= h($r['ma_hk']) ?></td><td><?= h($r['ten_hk']) ?></td><td><?= h($r['nam_hoc']) ?></td><td><a href="lophocphan.php?hk=<?= $r['id'] ?>"><?= $r['so_lhp'] ?> học phần</a> · <?= h($r['trang_thai']) ?></td>
             <td class="text-end"><a class="btn btn-sm btn-outline-primary" href="hocky.php?edit=<?= $r['id'] ?>">Sửa</a>
                 <form method="post" class="d-inline"><?= csrf_field() ?><input type="hidden" name="id" value="<?= $r['id'] ?>">
                     <button name="action" value="delete" class="btn btn-sm btn-outline-danger" data-confirm="Xóa học kỳ này?">Xóa</button></form></td></tr>

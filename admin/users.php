@@ -127,7 +127,7 @@ require __DIR__ . '/../includes/header.php';
     <tbody>
     <?php foreach ($rows as $i => $r): ?>
         <tr>
-            <td><?= $i + 1 ?></td><td><?= h($r['username']) ?></td><td class="cell-person"><?= h($r['ho_ten']) ?></td><td><?= h($r['email']) ?></td>
+            <td><?= $i + 1 ?></td><td><?= h($r['username']) ?></td><td><?= h($r['ho_ten']) ?></td><td><?= h($r['email']) ?></td>
             <td><?= h(TEN_VAI_TRO[$r['role']]) ?></td>
             <td><?= $r['trang_thai'] === 'active' ? '<span class="badge bg-success">Hoạt động</span>' : '<span class="badge bg-danger">Bị khóa</span>' ?></td>
             <td class="text-end text-nowrap">

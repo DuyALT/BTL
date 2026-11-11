@@ -134,11 +134,11 @@ require __DIR__ . '/../includes/header.php';
     <div class="col-md-3"><button class="btn btn-outline-primary">Lọc</button> <a href="sinhvien.php" class="btn btn-link">Xóa lọc</a></div>
 </form>
 <div class="card p-0">
-<table class="table table-hover table-sm table-fit mb-0">
+<table class="table table-hover table-sm mb-0">
     <thead class="table-light"><tr><th>#</th><th>Mã SV</th><th>Họ tên</th><th>Ngày sinh</th><th>Giới tính</th><th>Lớp</th><th>Khóa</th><th>Trạng thái học tập</th><th>Số HP</th><th>Tài khoản</th><th class="text-end">Thao tác</th></tr></thead>
     <tbody>
     <?php foreach ($rows as $i => $r): ?>
-        <tr><td><?= $i + 1 ?></td><td><?= h($r['ma_sv']) ?></td><td class="cell-person"><?= h($r['ho_ten']) ?></td>
+        <tr><td><?= $i + 1 ?></td><td><?= h($r['ma_sv']) ?></td><td><?= h($r['ho_ten']) ?></td>
             <td><?= $r['ngay_sinh'] ? date('d/m/Y', strtotime($r['ngay_sinh'])) : '' ?></td><td><?= h($r['gioi_tinh']) ?></td><td><?= h($r['lop']) ?></td><td><?= h($r['khoa_hoc']) ?></td><td><?= h($r['trang_thai_hoc']) ?></td><td><?= $r['so_hp'] ?></td>
             <td><?= $r['trang_thai'] === 'active' ? '<span class="badge bg-success">Hoạt động</span>' : ($r['trang_thai'] ? '<span class="badge bg-danger">Khóa</span>' : '<span class="badge bg-secondary">Chưa có</span>') ?></td>
             <td class="text-end text-nowrap">

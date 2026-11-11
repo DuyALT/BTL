@@ -79,7 +79,7 @@ require __DIR__ . '/../includes/header.php';
         <thead class="table-light text-center"><tr><th>Mã học phần</th><th>Mã môn</th><th class="text-start">Tên môn</th><th>TC</th><th>Thường xuyên</th><th>Giữa HP</th><th>Cuối HP</th><th>Tổng kết</th><th>Hệ 4</th><th>Kết quả</th></tr></thead>
         <tbody>
         <?php foreach ($mons as $m): [$chu, $he4] = quy_doi($m['tong_ket'] === null ? null : (float)$m['tong_ket']); ?>
-            <tr class="text-center"><td><?= h($m['ma_lhp']) ?></td><td><?= h($m['ma_mon']) ?></td><td class="text-start cell-entity"><?= h($m['ten_mon']) ?></td><td><?= $m['so_tin_chi'] ?></td>
+            <tr class="text-center"><td><?= h($m['ma_lhp']) ?></td><td><?= h($m['ma_mon']) ?></td><td class="text-start"><?= h($m['ten_mon']) ?></td><td><?= $m['so_tin_chi'] ?></td>
                 <?php foreach (array_keys(COT_DIEM) as $c): ?><td><?= h(hien_thi_diem($m, $c)) ?></td><?php endforeach; ?>
                 <td class="fw-bold"><?= fd($m['tong_ket']) ?></td><td><?= $he4 === null ? '' : number_format($he4, 1) ?></td>
                 <td class="<?= $m['ket_qua'] === null ? 'text-muted' : ($m['ket_qua'] === 'Đạt' ? 'kq-dat' : 'kq-truot') ?>"><?= h($m['ket_qua'] ?? 'Chưa có') ?></td></tr>

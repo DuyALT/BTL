@@ -86,14 +86,6 @@ a {text-decoration:none} button,input,select,textarea {font:inherit}
 .table {font-size:.77rem;--bs-table-hover-bg:#f7f9fd;margin-bottom:0}
 .table>thead th {background:#f8fafd!important;font-size:.62rem;color:#718198;letter-spacing:.055em;font-weight:650;border-top:0;padding:13px 16px;line-height:1.5}
 .table td,.table th {padding:13px 16px;border-color:#edf1f6;vertical-align:middle}
-/* Tên riêng: họ tên người (cell-person), tên môn/lớp/học kỳ/năm học (cell-entity). */
-.cell-person,.cell-entity {font-weight:600;color:var(--ink)}
-.cell-person {white-space:nowrap}
-/* Bảng nhiều cột: giảm đệm ngang để tên in đậm vẫn đủ chỗ, không phải cuộn ngang. */
-.table.table-fit td,.table.table-fit th {padding-left:8px;padding-right:8px}
-/* Bảng dày đặc: đệm dọc và cỡ chữ gọn hơn để nhiều cột vẫn vừa khung. */
-.table.table-dense td,.table.table-dense th {padding-top:8px;padding-bottom:8px}
-.table.table-dense {font-size:.74rem}
 .table-sm td,.table-sm th {padding:11px 14px}
 .table>tbody>tr:last-child>td {border-bottom:0}
 .table .btn {margin:2px 0}.table td small {color:var(--muted)}

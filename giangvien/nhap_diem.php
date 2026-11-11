@@ -98,7 +98,7 @@ require __DIR__ . '/../includes/header.php';
         <tbody>
         <?php foreach ($rows as $i => $r): ?>
             <tr data-search="<?= h(mb_strtolower($r['ma_sv'] . ' ' . $r['ho_ten'])) ?>">
-                <td><?= $i + 1 ?></td><td><?= h($r['ma_sv']) ?></td><td class="text-nowrap cell-person"><?= h($r['ho_ten']) ?></td><td class="cell-entity"><?= h($r['lop']) ?></td>
+                <td><?= $i + 1 ?></td><td><?= h($r['ma_sv']) ?></td><td class="text-nowrap"><?= h($r['ho_ten']) ?></td><td><?= h($r['lop']) ?></td>
                 <?php foreach (COT_DIEM as $c => $t):
                     $val = $old[$r['id']][$c] ?? hien_thi_diem($r, $c);
                     $val = is_scalar($val) ? $val : '';

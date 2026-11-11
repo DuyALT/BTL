@@ -46,10 +46,7 @@ require __DIR__ . '/includes/header.php';
     <section class="login-hero">
         <div class="d-flex align-items-center gap-2">
             <?php require __DIR__ . '/includes/brand-logo.php'; ?>
-            <div>
-                <b class="fs-5">EduScore.</b>
-                <div class="login-institute">Học viện An ninh nhân dân</div>
-            </div>
+            <b class="fs-5">EduScore.</b>
         </div>
         <div>
             <h1>Học hôm nay,<br>vững bước ngày mai.</h1>
@@ -64,7 +61,7 @@ require __DIR__ . '/includes/header.php';
     <!-- Cột phải: form đăng nhập -->
     <section class="login-panel">
         <div class="login-box">
-            <div class="login-brand-mobile"><?php require __DIR__ . '/includes/brand-logo.php'; ?><div><span>EduScore.</span><br><span class="login-institute">Học viện An ninh nhân dân</span></div></div>
+            <div class="login-brand-mobile"><?php require __DIR__ . '/includes/brand-logo.php'; ?><span>EduScore.</span></div>
             <div class="page-eyebrow mb-2">CỔNG QUẢN LÝ ĐIỂM HỌC TẬP</div>
             <h2 class="mb-1">Chào mừng trở lại!</h2>
             <p class="text-muted mb-4">Chào mừng bạn quay lại! Vui lòng đăng nhập để tiếp tục.</p>

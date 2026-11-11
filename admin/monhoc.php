@@ -112,7 +112,7 @@ require __DIR__ . '/../includes/header.php';
     <tbody>
     <?php foreach ($rows as $r): ?>
         <tr>
-            <td><?= h($r['ma_mon']) ?></td><td class="cell-entity"><?= h($r['ten_mon']) ?></td><td><?= $r['so_tin_chi'] ?></td>
+            <td><?= h($r['ma_mon']) ?></td><td><?= h($r['ten_mon']) ?></td><td><?= $r['so_tin_chi'] ?></td>
 
             <td><?= $r['so_lhp'] ?></td>
             <td class="text-end text-nowrap">

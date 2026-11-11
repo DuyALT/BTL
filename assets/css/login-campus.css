@@ -14,8 +14,6 @@
 .login-campus .login-panel {padding:36px;background:rgba(255,255,255,.97);border:1px solid #ffffffaa;border-radius:22px;box-shadow:0 20px 70px #0b1f3a33;backdrop-filter:blur(12px);min-height:0}
 .login-campus .login-box {max-width:100%}
 .login-campus .login-note {margin-bottom:0}
-.login-institute {font-weight:600;font-size:.78rem;line-height:1.35;color:#ffffffeb;letter-spacing:.01em}
-.login-brand-mobile .login-institute {font-size:.7rem;color:var(--muted)}
 .forgot-password-link {border:0;padding:0;background:transparent;color:#2563eb;font-size:.73rem;font-weight:550;text-decoration:none}
 .forgot-password-link:hover {color:#142d52;text-decoration:underline}
 @media(max-width:991.98px){
