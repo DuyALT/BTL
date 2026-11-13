@@ -22,8 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) $loi[] = 'Email không hợp lệ';
         if (!isset(TEN_VAI_TRO[$role])) $loi[] = 'Vai trò không hợp lệ';
         if (!in_array($trang_thai, ['active', 'locked'], true)) $loi[] = 'Trạng thái không hợp lệ';
-        if (!$id && strlen($pw) < 6) $loi[] = 'Mật khẩu tối thiểu 6 ký tự';
-        if ($id && $pw !== '' && strlen($pw) < 6) $loi[] = 'Mật khẩu tối thiểu 6 ký tự';
+        // Mật khẩu mặc định được phép: người dùng sẽ bị bắt đổi ở lần đăng nhập đầu
+        if ((!$id || $pw !== '') && $pw !== MAT_KHAU_MAC_DINH && ($e = loi_mat_khau($pw, $username))) {
+            $loi[] = rtrim($e, '.') . ' (hoặc dùng mật khẩu mặc định ' . MAT_KHAU_MAC_DINH . ' để người dùng tự đổi)';
+        }
         if ($id === (int)$me['id'] && ($role !== 'admin' || $trang_thai !== 'active')) $loi[] = 'Không thể tự hạ quyền hoặc tự khóa chính mình';
 
         $st = $pdo->prepare('SELECT COUNT(*) FROM users WHERE username = ? AND id <> ?');
@@ -108,7 +110,7 @@ require __DIR__ . '/../includes/header.php';
         <div class="col-md-1"><label class="form-label">Trạng thái</label>
             <select name="trang_thai" class="form-select"><option value="active">Hoạt động</option><option value="locked" <?= $e['trang_thai'] === 'locked' ? 'selected' : '' ?>>Khóa</option></select></div>
         <div class="col-md-2"><label class="form-label">Mật khẩu <?= $edit ? '(bỏ trống = giữ nguyên)' : '*' ?></label>
-            <input type="password" name="mat_khau_moi" class="form-control" <?= $edit ? '' : 'required' ?> data-label="Mật khẩu"></div>
+            <input type="password" name="mat_khau_moi" class="form-control" <?= $edit ? '' : 'required' ?> autocomplete="new-password" data-label="Mật khẩu" title="Tối thiểu 8 ký tự, có chữ và số; hoặc <?= MAT_KHAU_MAC_DINH ?> để người dùng tự đổi khi đăng nhập"></div>
         <div class="col-12"><button class="btn btn-success">Lưu</button> <a href="users.php" class="btn btn-secondary">Hủy</a></div>
     </form>
 </div>

@@ -76,7 +76,12 @@ function require_login(string ...$roles): array
     }
     $_SESSION['user'] = $user;   // cập nhật thông tin mới nhất
 
-    // 4. Sai vai trò -> báo không có quyền
+    // 4. Đang dùng mật khẩu mặc định -> phải đổi mật khẩu trước khi làm việc khác
+    if (!empty($_SESSION['phai_doi_mk']) && basename($_SERVER['SCRIPT_NAME']) !== 'doi_mat_khau.php') {
+        redirect('doi_mat_khau.php');
+    }
+
+    // 5. Sai vai trò -> báo không có quyền
     if ($roles && !in_array($user['role'], $roles, true)) {
         forbidden();
     }
@@ -146,6 +151,86 @@ function csrf_check(): void
         http_response_code(400);
         exit('Phiên làm việc không hợp lệ. Hãy tải lại trang và thử lại.');
     }
+}
+
+// ===================== CHỐNG DÒ MẬT KHẨU =====================
+// Ghi lần đăng nhập sai vào CSDL (không phụ thuộc cookie nên không né được bằng cách xóa cookie).
+// Khóa theo cặp tài khoản + máy: kẻ dò ở máy khác không làm khóa được tài khoản của người thật.
+
+const DN_SAI_TOI_DA    = 5;     // số lần sai cho 1 tài khoản từ 1 máy
+const DN_SAI_TOI_DA_IP = 20;    // số lần sai từ 1 máy, cộng mọi tài khoản
+const DN_KHOA_GIAY     = 900;   // khóa 15 phút tính từ lần sai cuối
+
+function dn_tao_bang(PDO $pdo): void
+{
+    static $xong = false;
+    if ($xong) return;
+    // Tự tạo nếu CSDL cũ chưa có bảng này (cài mới thì đã có trong schema.sql)
+    $pdo->exec("CREATE TABLE IF NOT EXISTS dang_nhap_sai (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50) NOT NULL,
+        ip VARCHAR(45) NOT NULL,
+        thoi_gian DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        KEY idx_dns_user_ip (username, ip, thoi_gian),
+        KEY idx_dns_ip (ip, thoi_gian)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+    $xong = true;
+}
+
+function dn_ip(): string
+{
+    return substr($_SERVER['REMOTE_ADDR'] ?? 'cli', 0, 45);
+}
+
+/** [số lần sai trong cửa sổ khóa, số giây đã qua kể từ lần sai cuối] */
+function dn_dem(PDO $pdo, string $where, array $p): array
+{
+    $st = $pdo->prepare("SELECT COUNT(*), TIMESTAMPDIFF(SECOND, MAX(thoi_gian), NOW()) FROM dang_nhap_sai
+        WHERE $where AND thoi_gian > NOW() - INTERVAL " . DN_KHOA_GIAY . ' SECOND');
+    $st->execute($p);
+    [$n, $qua] = $st->fetch(PDO::FETCH_NUM);
+    return [(int)$n, (int)$qua];
+}
+
+/** Số giây còn phải chờ trước khi được thử đăng nhập (0 = được thử) */
+function dn_cho_giay(PDO $pdo, string $username): int
+{
+    dn_tao_bang($pdo);
+    $cho = 0;
+    foreach ([['username = ? AND ip = ?', [$username, dn_ip()], DN_SAI_TOI_DA],
+              ['ip = ?', [dn_ip()], DN_SAI_TOI_DA_IP]] as [$where, $p, $max]) {
+        [$n, $qua] = dn_dem($pdo, $where, $p);
+        if ($n >= $max) $cho = max($cho, DN_KHOA_GIAY - $qua);
+    }
+    return $cho;
+}
+
+/** Ghi 1 lần sai; trả về số lần còn được thử trước khi bị khóa */
+function dn_ghi_sai(PDO $pdo, string $username): int
+{
+    dn_tao_bang($pdo);
+    $pdo->exec('DELETE FROM dang_nhap_sai WHERE thoi_gian < NOW() - INTERVAL 1 DAY');
+    $pdo->prepare('INSERT INTO dang_nhap_sai (username, ip) VALUES (?, ?)')->execute([$username, dn_ip()]);
+    [$n] = dn_dem($pdo, 'username = ? AND ip = ?', [$username, dn_ip()]);
+    return max(0, DN_SAI_TOI_DA - $n);
+}
+
+function dn_xoa_sai(PDO $pdo, string $username): void
+{
+    dn_tao_bang($pdo);
+    $pdo->prepare('DELETE FROM dang_nhap_sai WHERE username = ? AND ip = ?')->execute([$username, dn_ip()]);
+}
+
+// ===================== QUY TẮC MẬT KHẨU =====================
+
+/** Trả về thông báo lỗi nếu mật khẩu yếu, null nếu hợp lệ */
+function loi_mat_khau(string $pw, string $username): ?string
+{
+    if (mb_strlen($pw) < 8) return 'Mật khẩu tối thiểu 8 ký tự.';
+    if (strlen($pw) > 72) return 'Mật khẩu quá dài (tối đa 72 ký tự).';   // giới hạn của bcrypt
+    if (!preg_match('/\pL/u', $pw) || !preg_match('/\d/', $pw)) return 'Mật khẩu phải có cả chữ và số.';
+    if ($username !== '' && mb_stripos($pw, $username) !== false) return 'Mật khẩu không được chứa tên đăng nhập.';
+    return null;
 }
 
 // ===================== THÔNG BÁO (FLASH) =====================

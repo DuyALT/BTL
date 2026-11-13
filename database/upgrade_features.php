@@ -31,6 +31,7 @@ $pdo->exec('ALTER TABLE lich_su_diem MODIFY gia_tri_cu DECIMAL(4,2) NULL, MODIFY
 $pdo->exec('UPDATE diem SET tx=JSON_ARRAY(cc) WHERE tx IS NULL AND cc IS NOT NULL');
 $hasFk = $pdo->query("SELECT COUNT(*) FROM information_schema.TABLE_CONSTRAINTS WHERE CONSTRAINT_SCHEMA=DATABASE() AND TABLE_NAME='sinh_vien' AND CONSTRAINT_NAME='fk_sv_lop'")->fetchColumn();
 if (!$hasFk) $pdo->exec('ALTER TABLE sinh_vien ADD CONSTRAINT fk_sv_lop FOREIGN KEY (lop) REFERENCES lop_hanh_chinh(ma_lop) ON UPDATE CASCADE');
+$pdo->exec("CREATE TABLE IF NOT EXISTS dang_nhap_sai (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(50) NOT NULL, ip VARCHAR(45) NOT NULL, thoi_gian DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, KEY idx_dns_user_ip (username, ip, thoi_gian), KEY idx_dns_ip (ip, thoi_gian)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
 $pdo->beginTransaction();
 $pdo->exec('UPDATE mon_hoc SET diem_dat=5');
 foreach ($pdo->query('SELECT id FROM mon_hoc')->fetchAll() as $m) tinh_lai_theo_mon($pdo, (int)$m['id']);

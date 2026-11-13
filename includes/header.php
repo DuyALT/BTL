@@ -74,7 +74,7 @@ $pageDescriptions = [
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="<?= BASE_URL ?>assets/css/style.css" rel="stylesheet">
-    <link href="<?= BASE_URL ?>assets/css/eduscore.css?v=2" rel="stylesheet">
+    <link href="<?= BASE_URL ?>assets/css/eduscore.css?v=3" rel="stylesheet">
     <?php if($page==='login.php'): ?><link href="<?= BASE_URL ?>assets/css/login-campus.css?v=1" rel="stylesheet"><?php endif; ?>
     <script>try{if(localStorage.getItem('eduscore-sidebar')==='collapsed')document.documentElement.dataset.sidebar='collapsed';}catch(e){}</script>
 </head>
@@ -107,7 +107,8 @@ $pageDescriptions = [
         <div class="sidebar-footer">
             <p class="workspace-label">KHÔNG GIAN HỌC TẬP · <?= h(TEN_VAI_TRO[$u['role']]) ?></p>
             <a class="nav-item-link <?= $page === 'doi_mat_khau.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>doi_mat_khau.php"><i class="bi bi-key"></i><span>Đổi mật khẩu</span></a>
-            <a class="nav-item-link text-danger-emphasis" href="<?= BASE_URL ?>logout.php" data-confirm="Bạn có chắc chắn muốn đăng xuất không?"><i class="bi bi-box-arrow-right"></i><span>Đăng xuất</span></a>
+            <form method="post" action="<?= BASE_URL ?>logout.php" class="m-0"><?= csrf_field() ?>
+                <button type="submit" class="nav-item-link nav-item-button text-danger-emphasis" data-confirm="Bạn có chắc chắn muốn đăng xuất không?"><i class="bi bi-box-arrow-right"></i><span>Đăng xuất</span></button></form>
         </div>
     </aside>
 
@@ -136,7 +137,8 @@ $pageDescriptions = [
                     <li><hr class="dropdown-divider"></li>
                     <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="bi bi-person-circle me-2"></i>Hồ sơ cá nhân</button></li>
                     <li><a class="dropdown-item" href="<?= BASE_URL ?>doi_mat_khau.php"><i class="bi bi-key me-2"></i>Đổi mật khẩu</a></li>
-                    <li><a class="dropdown-item text-danger" href="<?= BASE_URL ?>logout.php" data-confirm="Bạn có chắc chắn muốn đăng xuất không?"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
+                    <li><form method="post" action="<?= BASE_URL ?>logout.php" class="m-0"><?= csrf_field() ?>
+                        <button type="submit" class="dropdown-item text-danger" data-confirm="Bạn có chắc chắn muốn đăng xuất không?"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</button></form></li>
                 </ul>
             </div>
         </header>

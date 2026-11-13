@@ -12,29 +12,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
 
-    // Chống dò mật khẩu: sai quá 5 lần thì chờ 60 giây
-    $fail = $_SESSION['login_fail'] ?? ['n' => 0, 't' => 0];
-    if ($fail['n'] >= 5 && time() - $fail['t'] < 60) {
-        $err = 'Bạn đã nhập sai quá nhiều lần. Vui lòng thử lại sau ' . (60 - (time() - $fail['t'])) . ' giây.';
-    } elseif ($username === '' || $password === '') {
+    $username = mb_substr($username, 0, 50);
+
+    if ($username === '' || $password === '') {
         $err = 'Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.';
+    } elseif ($cho = dn_cho_giay($pdo, $username)) {
+        // Chống dò mật khẩu: đang bị khóa thì không kiểm tra mật khẩu
+        $err = 'Bạn đã nhập sai quá nhiều lần. Vui lòng thử lại sau ' . ceil($cho / 60) . ' phút.';
     } else {
         $st = $pdo->prepare('SELECT * FROM users WHERE username = ?');
         $st->execute([$username]);
         $user = $st->fetch();
 
         if (!$user || !password_verify($password, $user['password_hash'])) {
-            $_SESSION['login_fail'] = ['n' => $fail['n'] + 1, 't' => time()];
-            $err = 'Tên đăng nhập hoặc mật khẩu không đúng.';
+            $con = dn_ghi_sai($pdo, $username);
+            $err = 'Tên đăng nhập hoặc mật khẩu không đúng.'
+                 . ($con === 0 ? ' Bạn đã bị tạm khóa đăng nhập 15 phút.' : ($con <= 2 ? " Còn $con lần thử." : ''));
         } elseif ($user['trang_thai'] !== 'active') {
             $err = 'Tài khoản đã bị khóa. Liên hệ quản trị viên.';
         } else {
+            dn_xoa_sai($pdo, $username);
             session_regenerate_id(true);           // chống session fixation
-            unset($_SESSION['login_fail']);
             $_SESSION['user'] = ['id' => $user['id'], 'username' => $user['username'],
                                  'ho_ten' => $user['ho_ten'], 'role' => $user['role'], 'trang_thai' => $user['trang_thai']];
             $_SESSION['last_activity'] = time();
-            redirect('index.php');
+            // Tài khoản mới tạo / vừa reset vẫn dùng mật khẩu mặc định -> bắt đổi ngay
+            $_SESSION['phai_doi_mk'] = password_verify(MAT_KHAU_MAC_DINH, $user['password_hash']);
+            redirect($_SESSION['phai_doi_mk'] ? 'doi_mat_khau.php' : 'index.php');
         }
     }
 }
