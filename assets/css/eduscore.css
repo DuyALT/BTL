@@ -30,6 +30,8 @@ a {text-decoration:none} button,input,select,textarea {font:inherit}
 .nav-item-link.active {background:#ffffff13;color:white;box-shadow:none}
 .nav-item-link.active::before {content:"";position:absolute;left:-13px;top:9px;bottom:9px;width:4px;background:#89b0ff;border-radius:0 4px 4px 0}
 .nav-item-link:hover {color:white;background:#ffffff0c}
+.nav-item-button {width:100%;border:0;background:none;text-align:left;font:inherit;font-size:.8rem}
+.nav-item-button:hover {background:#ffffff0c}
 .sidebar-footer {padding:14px 13px;border-color:#ffffff12}
 .workspace-label {margin:0 14px 10px;color:#8fa5c3;font-size:.64rem}
 .app-main {width:calc(100% - var(--sidebar-w));transition:margin .2s,width .2s}

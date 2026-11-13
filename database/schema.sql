@@ -3,6 +3,7 @@ SET NAMES utf8mb4;
 CREATE DATABASE IF NOT EXISTS quanlydiem CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE quanlydiem;
 SET FOREIGN_KEY_CHECKS=0;
+DROP TABLE IF EXISTS `dang_nhap_sai`;
 DROP TABLE IF EXISTS `lich_su_diem`;
 DROP TABLE IF EXISTS `diem`;
 DROP TABLE IF EXISTS `dang_ky`;
@@ -169,3 +170,14 @@ CREATE TABLE `lich_su_diem` (
   CONSTRAINT `fk_ls_diem` FOREIGN KEY (`diem_id`) REFERENCES `diem` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_ls_user` FOREIGN KEY (`nguoi_sua`) REFERENCES `users` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Nhật ký đăng nhập sai để chống dò mật khẩu (không đưa vào sao lưu; tự xóa sau 1 ngày)
+CREATE TABLE `dang_nhap_sai` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `ip` varchar(45) NOT NULL,
+  `thoi_gian` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `idx_dns_user_ip` (`username`,`ip`,`thoi_gian`),
+  KEY `idx_dns_ip` (`ip`,`thoi_gian`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

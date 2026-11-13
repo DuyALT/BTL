@@ -2,7 +2,7 @@
 
 | Nhóm theo yêu cầu | Chức năng | Trang / thành phần |
 |---|---|---|
-| 1–3 | Đăng nhập, đăng xuất, phiên, khóa tài khoản, phân quyền, đổi/reset mật khẩu, CRUD tài khoản | `login.php`, `logout.php`, `doi_mat_khau.php`, `admin/users.php`, `includes/auth.php` |
+| 1–3 | Đăng nhập, đăng xuất (POST + CSRF), phiên, khóa tài khoản, chống dò mật khẩu (sai 5 lần/15 phút theo tài khoản + máy, 20 lần theo máy), bắt đổi mật khẩu mặc định, quy tắc mật khẩu mạnh, phân quyền, đổi/reset mật khẩu, CRUD tài khoản | `login.php`, `logout.php`, `doi_mat_khau.php`, `admin/users.php`, `includes/auth.php` |
 | 4 | Hồ sơ SV: mã, họ tên, ngày sinh, giới tính, lớp, khóa, email, trạng thái; tìm/lọc và bảng điểm | `admin/sinhvien.php`, `sinhvien/tong_quan.php` |
 | 5 | CRUD lớp hành chính, tìm mã/tên, sĩ số và liên kết danh sách sinh viên | `admin/lop.php` |
 | 6 | CRUD giảng viên, tìm kiếm, tài khoản tự tạo, xem học phần được phân công | `admin/giangvien.php`, `admin/lophocphan.php?gv=...` |

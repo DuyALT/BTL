@@ -13,7 +13,8 @@ Bật Apache/MySQL trong XAMPP, mở http://localhost/BTL-GitHub/.
 - **Cài mới:** import `database/schema.sql` rồi `database/sample_data.sql`. SQL cài mới xóa các bảng cũ cùng tên.
 - **Nâng cấp giữ dữ liệu:** chạy `C:\xampp\php\php.exe database/upgrade_features.php`.
 - Sao chép `config/db.example.php` thành `config/db.php`, rồi chỉnh kết nối MySQL và `BASE_URL`. File `config/db.php` được Git bỏ qua.
-- Tài khoản mẫu: `admin`, `gv001`...`gv004`, `2251000001`...`2251000040`; mật khẩu `123456`.
+- Tài khoản mẫu: `admin`, `gv001`...`gv004`, `2251000001`...`2251000040`; mật khẩu `123456`. Lần đăng nhập đầu sẽ bị yêu cầu đổi mật khẩu (tối thiểu 8 ký tự, có chữ và số).
+- Quên mật khẩu hoặc bị tạm khóa do nhập sai nhiều lần: `C:\xampp\php\php.exe database/dat_lai_mat_khau.php <tên đăng nhập>` (đặt lại `123456`), hoặc thêm `--chi-mo-khoa` để chỉ mở khóa.
 - Điểm cũ sau nâng cấp ở trạng thái nháp cho đến khi được kiểm tra và lưu chính thức.
 
 ## Tài liệu bàn giao
@@ -34,4 +35,14 @@ C:\xampp\php\php.exe database/test_features.php
 powershell -ExecutionPolicy Bypass -File database/test_http.ps1
 ```
 
-Kiểm thử tích hợp dùng database thử riêng và tự xóa sau khi chạy. Kiểm thử HTTP cần Apache/MySQL và các tài khoản mẫu; không thay đổi điểm hiện tại. Thư mục `database/` bị chặn truy cập web; chạy các script PHP bằng CLI.
+Kiểm thử tích hợp dùng database thử riêng và tự xóa sau khi chạy. Kiểm thử HTTP cần Apache/MySQL và các tài khoản mẫu (truyền `-BaseUrl` nếu thư mục khác `BTL-GitHub`); không thay đổi điểm, tạm đổi mật khẩu 3 tài khoản mẫu rồi tự trả về mặc định. Thư mục `database/` bị chặn truy cập web; chạy các script PHP bằng CLI.
+
+tai khoan test:
+tk: admin
+mk: HoNgocDuy01
+
+tk: gv001
+mk: NguyenVanHung01
+
+tk:250001
+mk: DangMinhHuong01
