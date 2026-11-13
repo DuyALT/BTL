@@ -1,0 +1,20 @@
+.tools/
+.kombai/
+database/*backup*
+database/before_restore_*
+
+# Database connection
+/config/db.php
+
+# Local environment
+.env
+.env.*
+!.env.example
+
+# Database backups and dumps
+/database/*backup*
+/database/quanlydiem.sql
+
+# Temporary PHP backups
+**/features_backup_*.php
+**/grading_backup_*.php
